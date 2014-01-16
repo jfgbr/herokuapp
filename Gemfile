@@ -5,13 +5,14 @@ gem 'rails', '4.0.2'
 
 # Use mysql as the database for Active Record
 #gem 'mysql2'
-group :development do
+group :development , :test do
+  gem 'rspec-rails', '2.13.1'
   gem 'mysql2'
+  gem 'capybara'
 end
 
 group :production do
   gem 'pg'
-  gem 'rspec-rails', '2.13.1'
 end
 
 gem 'bootstrap-sass', '2.3.2.0'
