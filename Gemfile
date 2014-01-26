@@ -7,7 +7,9 @@ gem 'rails', '4.0.2'
 #gem 'mysql2'
 group :development , :test do
   gem 'rspec-rails', '2.13.1'
-  gem 'mysql2'
+  gem 'mysql2', '0.3.15'
+#  gem 'mysql', '2.9.1'
+#  gem "ruby-mysql", "~> 2.9.12"
   gem 'capybara'
 end
 
