@@ -24,7 +24,7 @@ group :production do
 end
 
 gem 'faker', '1.1.2'
-gem 'will_paginate', '3.0.4'
+gem 'will_paginate', '3.0.5'
 gem 'bcrypt-ruby', '3.1.2'
 gem 'bootstrap-sass', '2.3.2.0'
 gem 'sass-rails', '4.0.1'
