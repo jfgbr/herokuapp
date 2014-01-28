@@ -3,6 +3,97 @@ body {
 	padding-top: 70px;
 }
 
+/*ul {
+  list-style: none;
+}*/
+
+.jumbotron {
+  padding: 30px;
+  margin-bottom: 30px;
+  font-size: 14px;
+  font-weight: 200;
+  line-height: 2.1428571435;
+  color: inherit;
+  background-color: #eeeeee;
+}
+
+.form-control {
+  width: 40%;
+  min-width: 130px;
+}
+
+@media (min-width: 768px) {
+.form-control {
+  width: 100%;
+ }
+}
+
+.input-xs {
+  height: 20px;
+  padding: 2px 5px;
+  font-size: 10px;
+  line-height: 1.8;
+  border-radius: 2px;
+}
+select.input-xs {
+  height: 20px;
+  line-height: 20px;
+}
+
+@media (min-width: 768px) {
+  .navbar-form .form-group-xs {
+  	margin-top: 7px;
+  }
+ }
+ 
+#error_explanation {
+  color: #f00;
+  ul {
+    list-style: none;
+    margin: 0 0 18px 0;
+  li {
+    font-size: 8px;
+  }
+}
+  }
+
+.field_with_errors > input{
+  /*@extend .control-group;
+  @extend .error;*/
+  border-color: red;
+}
+
+/* footer */
+
+footer {
+  margin-top: 45px;
+  padding-top: 5px;
+  border-top: 1px solid #eaeaea;
+  color: #999;
+}
+
+footer a {
+  color: #555;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+footer small {
+  float: left;
+}
+
+footer ul {
+  float: right;
+  list-style: none;
+}
+
+footer ul li {
+  float: left;
+  margin-left: 10px;
+}
+
 /* Pagination */
 
 .pagination {

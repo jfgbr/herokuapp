@@ -15,6 +15,12 @@
 				<li class="<%= is_active?(root_path) %>">
 					<%= link_to "Home", root_path %>
 				</li>
+				<li class="<%= is_active?(about_path) %>">
+					<%= link_to "About",   about_path %>
+				</li>
+     			<li class="<%= is_active?(contact_path) %>">
+     				<%= link_to "Contact", contact_path %>
+     			</li>
 			<% if signed_in? %>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
@@ -39,23 +45,28 @@
 			</ul>
 			<% else %>
 			</ul>
-
-				<%= form_for(:session, url: sessions_path ,:html => {:class => 'navbar-form navbar-right', 'role' => 'form'}) do |f| %>
-					<div class="form-group">
-						<%= f.text_field :email, autofocus: true, placeholder: "E-mail" %>
-					</div>
-		
-					<div class="form-group">
-						<%= f.password_field :password, placeholder: "Password" %>
-					</div>
-		
-					<%= f.submit "Sign in", class: "btn btn-sucess" %>
-					
-				<% end %>
 			<ul class="nav navbar-nav navbar-right">
 				<li>
+					<%= form_for(:session, url: sessions_path ,:html => {:class => 'navbar-form navbar-right', 'role' => 'form'}) do |f| %>
+						<div class="form-group form-group-xs">
+							<%= f.label :email, class: "sr-only" %>
+							<%= f.text_field :email, autofocus: true, placeholder: "E-mail", class: "form-control input-xs" %>
+						</div>
+			
+						<div class="form-group form-group-xs">
+							<%= f.label :password, class: "sr-only" %>
+							<%= f.password_field :password, placeholder: "Password", class: "form-control input-xs" %>
+						</div>
+						<div class="form-group form-group-xs">
+							<%= f.submit "Sign in", class: "btn btn-success btn-xs", style: "margin-right:10px;"%>
+						</div>
+						
+					<% end %>
+				</li>
+				<li class="<%= is_active?(signup_path) %>">
 					<%= link_to "Sign up now!", signup_path %>
 				</li>
+				
 			</ul>
 				
 			<% end %>
