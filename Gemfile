@@ -23,16 +23,21 @@ group :production do
   gem 'pg'
 end
 
-gem 'faker', '1.1.2'
-gem 'will_paginate', '3.0.5'
 gem 'bcrypt-ruby', '3.1.2'
-gem 'bootstrap-sass', '2.3.2.0'
-gem 'sass-rails', '4.0.1'
+gem 'will_paginate', '3.0.5'
+gem 'faker', '1.1.2'
+
+#gem 'bootstrap-sass', '2.3.2.0'
+#gem 'sass-rails', '4.0.1'
 gem 'uglifier', '2.1.1'
 gem 'coffee-rails', '4.0.1'
 gem 'jquery-rails', '3.0.4'
 gem 'turbolinks', '1.1.1'
 gem 'jbuilder', '1.2'
+
+#gem "less-rails" #Sprockets (what Rails 3.1 uses for its asset pipeline) supports LESS
+#gem "twitter-bootstrap-rails"
+#gem 'twitter-bootstrap-rails', :git => 'git://github.com/seyhunak/twitter-bootstrap-rails.git'
 
 gem 'execjs'
 gem 'therubyracer', :platforms => :ruby
