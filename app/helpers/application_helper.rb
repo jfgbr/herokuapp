@@ -12,4 +12,12 @@ module ApplicationHelper
   def page_heading(title)
     content_tag(:h1, title, :class => "title")
   end
+
+  def is_active?(link_path)
+    if current_page?(link_path)
+      "active"
+    else
+      ""
+    end
+  end
 end
