@@ -26,6 +26,9 @@ end
 gem 'bcrypt-ruby', '3.1.2'
 gem 'will_paginate', '3.0.5'
 gem 'faker', '1.1.2'
+#gem 'dependent-fields-rails'
+gem "railties"
+#gem "bootstrap-combobox"
 
 #gem 'bootstrap-sass', '2.3.2.0'
 gem 'sass-rails', '4.0.1'

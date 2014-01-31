@@ -13,6 +13,12 @@ class User < ActiveRecord::Base
   #validates_confirmation_of :password,
     #                      if: lambda { |m| m.password.present? }
   
+  has_many :client_appointments, :class_name => "Appointment", :foreign_key => "client_id"
+  has_many :employee_appointments, :class_name => "Appointment", :foreign_key => "employee_id"
+  has_many :employee_services, :class_name => "EmployeeService", :foreign_key => "employee_id"
+  has_many :services, :class_name => "Service", :through => :employee_services
+  has_many :categories, :class_name => "Category", :through => :employee_services
+  
   def User.new_remember_token
     SecureRandom.urlsafe_base64
   end

@@ -173,6 +173,7 @@ DEPENDENCIES
   mysql2 (= 0.3.15)
   pg
   rails (= 4.0.2)
+  railties
   rspec-rails (= 2.13.1)
   sass-rails (= 4.0.1)
   sdoc

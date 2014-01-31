@@ -1,0 +1,22 @@
+<% content_for :head do %>
+	<%= javascript_include_tag "appointment", "data-turbolinks-track" => true %>
+<% end %>
+
+<% provide(:title, "New appointment") %>
+<%= page_heading('New appointment')%>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@appointment, url: appointments_path) do |f| %>
+      <%= @cy %>
+      <%= f.select(:employee_id, options_for_select([["Select a employee", 0]] + employees_for_select, f.object.employee_id)) %>
+      
+	  <%= render "shared/category_service_dependent", f: f, model: @appointment, category_id: params[:category_id] %>
+
+      <%= f.label :appointment_date %>
+      <%= f.datetime_field :appointment_date %>
+
+      <%= f.submit "Create", class: "btn btn-large btn-primary" %>
+      <%= f.submit "Cancel", class: "btn btn-large btn-default", :name => "cancel" %>
+    <% end %>
+  </div>
+</div>

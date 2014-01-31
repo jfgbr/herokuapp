@@ -1,0 +1,15 @@
+<%= select_tag :category_id, options_from_collection_for_select([], "id", "text"), :prompt => "Select a category",
+"data-option-dependent" => true,
+"data-option-observed" => "appointment_employee_id",
+"data-option-observer-initial-value" => f.object.employee_id,
+"data-option-url" => "categories/:employee_id:/employee_categories.json",
+"data-option-key-method" => :id,
+"data-option-value-method" => :text %>
+
+<%= f.select(:service_id, [], {:prompt => "Select a service"},
+"data-option-dependent" => true,
+"data-option-observed" => "appointment_employee_id|category_id",
+"data-option-observer-initial-value" => f.object.service_id,
+"data-option-url" => "categories/:category_id:/category_services.json",
+"data-option-key-method" => :id,
+"data-option-value-method" => :text) %>

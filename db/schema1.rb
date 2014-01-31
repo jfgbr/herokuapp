@@ -11,21 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140131103017) do
+ActiveRecord::Schema.define(version: 20140129101115) do
 
   create_table "appointments", force: true do |t|
-    t.integer  "client_id"
-    t.integer  "employee_id"
+    t.integer  "user_id"
     t.integer  "service_id"
-    t.datetime "appointment_date"
-    t.boolean  "paid",             default: false
+    t.datetime "when"
+    t.boolean  "paid",       default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "appointments", ["client_id"], name: "index_appointments_on_client_id", using: :btree
-  add_index "appointments", ["employee_id"], name: "index_appointments_on_employee_id", using: :btree
   add_index "appointments", ["service_id"], name: "index_appointments_on_service_id", using: :btree
+  add_index "appointments", ["user_id"], name: "index_appointments_on_user_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "text"
@@ -33,24 +31,14 @@ ActiveRecord::Schema.define(version: 20140131103017) do
     t.datetime "updated_at"
   end
 
-  create_table "employee_services", force: true do |t|
-    t.integer  "employee_id"
-    t.integer  "service_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "employee_services", ["employee_id"], name: "index_employee_services_on_employee_id", using: :btree
-  add_index "employee_services", ["service_id"], name: "index_employee_services_on_service_id", using: :btree
-
   create_table "services", force: true do |t|
-    t.integer  "category_id"
     t.string   "text"
-    t.boolean  "active",                                default: true
+    t.integer  "category_id"
+    t.boolean  "active",                                 default: true
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.decimal  "price",         precision: 5, scale: 2, default: 20.0
-    t.time     "duration_time"
+    t.decimal  "price",         precision: 10, scale: 2, default: 20.0
+    t.time     "duration_time",                          default: '2000-01-01 00:00:15'
   end
 
   add_index "services", ["category_id"], name: "index_services_on_category_id", using: :btree
@@ -63,7 +51,6 @@ ActiveRecord::Schema.define(version: 20140131103017) do
     t.string   "password_digest"
     t.string   "remember_token"
     t.boolean  "admin",           default: false
-    t.boolean  "employee",        default: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

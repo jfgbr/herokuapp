@@ -9,6 +9,12 @@
 
 		<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+		<%= yield :head %>
+		<%= #if current_page?("appointment") 
+			#javascript_include_tag "appointment" , "data-turbolinks-track" => true 
+		#end
+		%>
+		
 		<%= csrf_meta_tags %>
 
 		<!-- Le HTML5 shim, for IE6-8 support of HTML elements -->

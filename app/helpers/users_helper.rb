@@ -8,4 +8,8 @@ module UsersHelper
     image_tag(gravatar_url, alt: user.name, class: "gravatar")
   end
   
+  def employees_for_select
+    User.where(:employee => true).order("name ASC").collect { |m| [m.name, m.id] }
+  end
+  
 end

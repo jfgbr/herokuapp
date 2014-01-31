@@ -18,13 +18,16 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(user_params)
-
-    if @user.save
-      sign_in @user
-      flash[:success] = "Welcome!"
-      redirect_to @user
+    if params[:cancel]
+      redirect_to root_path
     else
-      render 'new'
+      if @user.save
+        sign_in @user
+        flash[:success] = "Welcome!"
+        redirect_to @user
+      else
+        render 'new'
+      end
     end
   end
   
@@ -44,30 +47,26 @@ class UsersController < ApplicationController
   end
   
   def update
-    @user = User.find(params[:id])
-    if @user.update_attributes(user_params)
-      flash[:success] = "Profile updated"
+    if params[:cancel]
       redirect_to @user
     else
-      render 'edit'
+      @user = User.find(params[:id])
+      if @user.update_attributes(user_params)
+        flash[:success] = "Profile updated"
+        redirect_to @user
+      else
+        render 'edit'
+      end
     end
   end
   
   private
-  # Never trust parameters from the scary internet, only allow the white list through.
+    # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :password, :password_confirmation)
     end
     
     # Before filters
-
-    def signed_in_user
-      unless signed_in?
-        store_location
-        redirect_to signin_url, notice: "Please sign in."
-      end
-    end
-    
     def correct_user?
       @user = User.find(params[:id])
       current_user?(@user)
@@ -75,10 +74,6 @@ class UsersController < ApplicationController
     
     def correct_user
       redirect_to(root_url) unless correct_user?
-    end
-    
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
     end
     
     def show_user

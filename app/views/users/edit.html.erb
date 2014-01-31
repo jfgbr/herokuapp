@@ -2,14 +2,16 @@
 <%= page_heading('Update your profile')%>
 
 <div class="row">
-  <div class="span6 offset3">
-    <%= form_for(@user) do |f| %>
-      <%= render 'fields', f: f %>
+	<div class="span6 offset3">
+		<%= form_for(@user) do |f| %>
+			<%= render 'shared/error_messages', model: @user %>
+			<%= render 'fields', f: f, model: @user %>
+	
+			<%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+			<%= f.submit "Cancel", class: "btn btn-large btn-default", :name => "cancel" %>
+		<% end %>
 
-      <%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
-    <% end %>
-
-    <%= gravatar_for @user %>
-    <a href="http://gravatar.com/emails">change</a>
-  </div>
+		<%= gravatar_for @user %>
+		<a href="http://gravatar.com/emails">change</a>
+	</div>
 </div>

@@ -1,0 +1,17 @@
+<tr>
+	<td>
+	  <%= service.category.text %>
+	</td>
+	<td>
+	  <%= service.text %>
+	</td>
+	<td>
+	  $<%= service.price %>
+	</td>
+	<td>
+	  <%= service.duration_time %> min
+	</td>
+	<td>
+	  <%= link_to "Edit", edit_service_path(service) %>
+	</td>
+</tr>

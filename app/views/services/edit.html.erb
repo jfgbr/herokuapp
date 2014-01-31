@@ -1,0 +1,35 @@
+<% provide(:title, 'Edit service') %>
+<%= page_heading('Update service')%>
+
+<div class="row">
+	<div class="span6 offset3">
+		<%= form_for(@service) do |f| %>
+
+		<%= render 'shared/error_messages', model: @service %>
+
+		<div class="form-group" style ="width:250px;">
+			<%= f.label :category_id %>
+			<%= f.text_field :category_id, value: @service.category.text , class: "form-control input-sm", disabled: "disabled"%>
+		</div>
+		
+		<div class="form-group" style ="width:250px;">
+			<%= f.label :text %>
+			<%= f.text_field :text, class: "form-control input-sm" %>
+		</div>
+		
+		<div class="form-group" style ="width:50px;">
+			<%= f.label :price %>
+			<%= f.text_field :price, class: "form-control input-sm" %>
+		</div>
+		
+		<div class="form-group" style ="width:50px;">
+			<%= f.label :duration_time, style: "white-space: nowrap;"%>
+			<%= f.text_field :duration_time, class: "form-control input-sm" %>
+		</div>
+
+		<%= f.submit "Save changes", class: "btn btn-large btn-primary" %>
+		<%= f.submit "Cancel", class: "btn btn-large btn-default", :name => "cancel" %>
+		<% end %>
+
+	</div>
+</div>
