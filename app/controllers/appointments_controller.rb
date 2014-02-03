@@ -1,7 +1,9 @@
 class AppointmentsController < ApplicationController
   def new
+    @user = User.new
     @appointment = Appointment.new
     @employee = User.new
+    @employee_services = EmployeeService.all
     #@cat = Category.new
   end
 

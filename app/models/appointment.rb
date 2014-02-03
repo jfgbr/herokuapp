@@ -1,11 +1,15 @@
 class Appointment < ActiveRecord::Base
+  
+  #id, client_id, employee_service_id, appointment_date, paid
+  
   belongs_to :client, :class_name => "User", :foreign_key => "client_id"
   #belongs_to :employee, :class_name => "User", :foreign_key => "employee_id"
   belongs_to :employee_service
   
-  has_many :emplyees, :through => :employee_service
+  has_many :employees, :through => :employee_service
+  has_many :services, :through => :employee_service
   #belongs_to :category
-  #has_many :category_id, :through => :services
+  #has_many :categories, :through => :services
   
   #accepts_nested_attributes_for :services
   
