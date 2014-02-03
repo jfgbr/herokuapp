@@ -23,6 +23,7 @@ Herokuapp::Application.routes.draw do
   match '/appointments',  to: 'appointments#new',  via: 'get'
   #match '/appointment/delete',  to: 'appointments#destroy',         via: 'delete'
   
+  #get "user/employees" => "users#employees", :as => "employees", :format => :json
   get "categories/:employee_id/employee_categories" => "categories#employee", :as => "employee_categories", :format => :json
   get "categories/:category_id/category_services" => "categories#services", :as => "category_services", :format => :json
   

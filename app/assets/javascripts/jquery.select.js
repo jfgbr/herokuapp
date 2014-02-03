@@ -34,15 +34,18 @@ jQuery(document).ready(function() {
 								observer.val(observer_initial_val);
 								observer_initial_val = null;
 							}
+							//observer.change();
 						});
 					});
 					
 				}
 			});
+			if (observer_initial_val != null){
+				observer.val(observer_initial_val);
+								observer_initial_val = null;
+			}
 		});
 		
-		if (observer.val()) {
-			observer.change();
-		}
+		
 	});
 }); 

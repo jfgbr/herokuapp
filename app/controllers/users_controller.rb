@@ -60,6 +60,10 @@ class UsersController < ApplicationController
     end
   end
   
+  def employees
+    employees_for_select
+  end
+  
   private
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params

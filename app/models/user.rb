@@ -12,12 +12,14 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
   #validates_confirmation_of :password,
     #                      if: lambda { |m| m.password.present? }
-  
-  has_many :client_appointments, :class_name => "Appointment", :foreign_key => "client_id"
-  has_many :employee_appointments, :class_name => "Appointment", :foreign_key => "employee_id"
-  has_many :employee_services, :class_name => "EmployeeService", :foreign_key => "employee_id"
-  has_many :services, :class_name => "Service", :through => :employee_services
-  has_many :categories, :class_name => "Category", :through => :employee_services
+  #has_many :employee_services
+  belongs_to :appointments
+  #has_many :client_appointments, :class_name => "Appointment", :foreign_key => "client_id"
+  #has_many :employee_appointments, :class_name => "Appointment", :foreign_key => "employee_id"
+  #has_many :employee_services, :class_name => "EmployeeService", :foreign_key => "employee_id"
+  belongs_to :employee_service
+  has_many :services, :through => :employee_service
+  has_many :categories, :through => :services
   
   def User.new_remember_token
     SecureRandom.urlsafe_base64

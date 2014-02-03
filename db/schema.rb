@@ -14,21 +14,19 @@
 ActiveRecord::Schema.define(version: 20140131103017) do
 
   create_table "appointments", force: true do |t|
-    t.integer  "client_id"
-    t.integer  "employee_id"
-    t.integer  "service_id"
-    t.datetime "appointment_date"
-    t.boolean  "paid",             default: false
+    t.integer  "client_id",                           null: false
+    t.integer  "employee_service_id",                 null: false
+    t.datetime "appointment_date",                    null: false
+    t.boolean  "paid",                default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "appointments", ["client_id"], name: "index_appointments_on_client_id", using: :btree
-  add_index "appointments", ["employee_id"], name: "index_appointments_on_employee_id", using: :btree
-  add_index "appointments", ["service_id"], name: "index_appointments_on_service_id", using: :btree
+  add_index "appointments", ["employee_service_id"], name: "index_appointments_on_employee_service_id", using: :btree
 
   create_table "categories", force: true do |t|
-    t.string   "text"
+    t.string   "text",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -44,8 +42,8 @@ ActiveRecord::Schema.define(version: 20140131103017) do
   add_index "employee_services", ["service_id"], name: "index_employee_services_on_service_id", using: :btree
 
   create_table "services", force: true do |t|
-    t.integer  "category_id"
-    t.string   "text"
+    t.integer  "category_id",                                          null: false
+    t.string   "text",                                                 null: false
     t.boolean  "active",                                default: true
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -56,8 +54,8 @@ ActiveRecord::Schema.define(version: 20140131103017) do
   add_index "services", ["category_id"], name: "index_services_on_category_id", using: :btree
 
   create_table "users", force: true do |t|
-    t.string   "name"
-    t.string   "email"
+    t.string   "name",                            null: false
+    t.string   "email",                           null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "password_digest"

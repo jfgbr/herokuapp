@@ -1,10 +1,9 @@
 class CreateAppointments < ActiveRecord::Migration
   def change
     create_table :appointments do |t|
-      t.integer :client_id
-      t.integer :employee_id
-      t.integer :service_id
-      t.datetime :appointment_date
+      t.integer :client_id, null: false
+      t.integer :employee_service_id, null: false
+      t.datetime :appointment_date, null: false
       t.boolean :paid, default: false
 
       t.timestamps

@@ -8,17 +8,11 @@
   <div class="span6 offset3">
     <%= form_for(@appointment, url: appointments_path) do |f| %>
     <%= render 'shared/error_messages', model: @appointment %>
-    <%= f.fields_for :employee_service do |es| %>
-	    <div class="form-group">
-	    	<%= f.collection_select :employee_id, User.where(:employee => true).order(:name), :id, :name, include_blank: true, :class => "form-control input-sm" %>
-	    </div>
-	    <%= es.fields_for :service do |s| %>
-	    <div class="field">
-			<%= f.label :category_id %><br />
-			<%= f.grouped_collection_select :category_id, User.order(:name), :categories, :name, :id, :text, include_blank: true %>
-	  	</div>
-	  	<% end %>
-  	<% end %>
+    <div class="form-group">
+      <%= f.select(:employee_id, employees_for_select, {},
+:class => "form-control input-sm")  %>
+    </div>
+	  <%= render "shared/category_service_dependent", f: f, model: @appointment, category_id: params[:category_id] %>
 	<div class="form-group">
       <%= f.label :appointment_date %>
       <%= f.datetime_field :appointment_date, class: "form-control input-sm" %>

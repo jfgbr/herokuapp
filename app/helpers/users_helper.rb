@@ -9,7 +9,8 @@ module UsersHelper
   end
   
   def employees_for_select
-    User.where(:employee => true).order("name ASC").collect { |m| [m.name, m.id] }
+    none = User.new(:name => "Select a employee")
+    [[none.name, none.id]] + User.where(:employee => true).order("name ASC").collect { |m| [m.name, m.id] }
   end
   
 end

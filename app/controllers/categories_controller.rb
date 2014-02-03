@@ -1,9 +1,10 @@
 class CategoriesController < ApplicationController
   include CategoriesHelper
   def employee
-    category_for_select_by_employee(params[:employee_id])
+    @employee = params[:employee_id]
+    category_for_select_by_employee(@employee)
   end
   def services
-    services_by_category(params[:category_id])
+    services_by_category(@employee,params[:category_id])
   end
 end
