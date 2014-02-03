@@ -1,18 +1,14 @@
 class AppointmentsController < ApplicationController
   def new
-    @user = User.new
     @appointment = Appointment.new
-    @employee = User.new
-    @employee_services = EmployeeService.all
-    #@cat = Category.new
   end
 
   def create
     @current_user = current_user
     @appointment = Appointment.new(appointment_params)
+    #@appointment.employee_service = EmployeeService.new(:employee_id => params[:employee_id])
+    #@appointment.employee_service = EmployeeService.new(employee_service_params)
     @appointment.client_id = @current_user.id
-    @appointment.employee_service = EmployeeService.where(:employee_id => @employee)
-    @cat = params[:category].to_i
 
     if @appointment.save
       flash[:success] = "Appointment created"
@@ -33,6 +29,10 @@ class AppointmentsController < ApplicationController
   private
 
   def appointment_params
-    params.require(:appointment).permit(:employee_service_id, :appointment_date, :paid)
+    params.require(:appointment).permit(:employees, :services, :appointment_date, :paid)
   end
+  
+  #def employee_service_params
+  #  params.require(:appointment).permit(:employees, :services)
+  #end
 end

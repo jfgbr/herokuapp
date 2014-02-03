@@ -11,10 +11,11 @@ class Appointment < ActiveRecord::Base
   #belongs_to :category
   #has_many :categories, :through => :services
   
+  #accepts_nested_attributes_for :employees
   #accepts_nested_attributes_for :services
   
   validates :client_id, presence: true
   #validates :employee_id, presence: true
-  validates :service_id, presence: true
+  validates :employee_service_id, presence: true
   validates :appointment_date, presence: true
 end

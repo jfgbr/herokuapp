@@ -10,14 +10,24 @@
     <%= render 'shared/error_messages', model: @appointment %>
     <%= f.fields_for :employees do |es| %>
 	    <div class="form-group">
-	    	<%= es.collection_select :employee_id, User.where(:employee => true).order(:name), :id, :name, include_blank: true, :class => "form-control input-sm" %>
+	    	<%= es.collection_select :employee_id, User.where(:employee => true).order(:name), :id, :name, 
+	    		{include_blank: true}, 
+	    		{:class => "dynamic-select form-control input-sm", "data-children" => "appointment_services_category_id|appointment_services_service_id"} %>
 	    </div>
 	        
   	<% end %>
 	<%= f.fields_for :services do |s| %>
 	    <div class="field">
 			<%= s.label :category_id %><br />
-			<%= s.grouped_collection_select :category_id, User.where(:employee => true).order(:name), :categories, :name, :id, :text, include_blank: true %>
+			<%= s.grouped_collection_select :category_id, User.where(:employee => true).order(:name), :categories, :name, :id, :text, 
+				{include_blank: true}, 
+	    		{:class => "dynamic-select form-control input-sm", "data-children" => "appointment_services_service_id"} %>
+	  	</div>
+	  	<div class="field">
+			<%= s.label :service_id %><br />
+			<%= s.grouped_collection_select :service_id, Category.all.order(:text), :services, :text, :id, :text, 
+				{include_blank: true}, 
+	    		{:class => "form-control input-sm"} %>
 	  	</div>
   	<% end %>
 	<div class="form-group">
