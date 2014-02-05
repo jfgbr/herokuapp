@@ -8,28 +8,34 @@
   <div class="span6 offset3">
     <%= form_for(@appointment, url: appointments_path) do |f| %>
     <%= render 'shared/error_messages', model: @appointment %>
-    <%= f.fields_for :employees do |es| %>
-	    <div class="form-group">
-	    	<%= es.collection_select :employee_id, User.where(:employee => true).order(:name), :id, :name, 
-	    		{include_blank: true}, 
-	    		{:class => "dynamic-select form-control input-sm", "data-children" => "appointment_services_category_id|appointment_services_service_id"} %>
-	    </div>
-	        
-  	<% end %>
-	<%= f.fields_for :services do |s| %>
-	    <div class="field">
-			<%= s.label :category_id %><br />
-			<%= s.grouped_collection_select :category_id, User.where(:employee => true).order(:name), :categories, :name, :id, :text, 
-				{include_blank: true}, 
-	    		{:class => "dynamic-select form-control input-sm", "data-children" => "appointment_services_service_id"} %>
-	  	</div>
-	  	<div class="field">
-			<%= s.label :service_id %><br />
-			<%= s.grouped_collection_select :service_id, Category.all.order(:text), :services, :text, :id, :text, 
-				{include_blank: true}, 
-	    		{:class => "form-control input-sm"} %>
-	  	</div>
-  	<% end %>
+    <% @template = "appointment_" %>
+    
+    <div class="form-group">
+    	<%= f.label :employee_id %>
+		<%= f.collection_select :employee_id, User.where(:employee => true).order(:name), :id, :name, 
+			{include_blank: true}, 
+			{:class => "dynamic-select form-control input-sm", 
+				"data-children" => @template+"category_id",
+				"data-option-initial-value" => f.object.employee_id} %>
+    </div>
+    
+    <div class="form-group">
+		<%= f.label :category_id %>
+		<%= f.grouped_collection_select :category_id, User.where(:employee => true).order(:name), :categories, :name, :id, :text, 
+			{include_blank: true}, 
+    		{:class => "dynamic-select form-control input-sm", 
+    			"data-children" => @template+"service_id",
+				"data-option-initial-value" => f.object.category_id} %>
+  	</div>
+	
+  	<div class="form-group">
+		<%= f.label :service_id %>
+		<%= f.grouped_collection_select :service_id, Category.all.order(:text), :services, :text, :id, :text, 
+			{include_blank: true}, 
+    		{:class => "dynamic-select form-control input-sm",
+				"data-option-initial-value" => f.object.service_id} %>
+  	</div>
+
 	<div class="form-group">
       <%= f.label :appointment_date %>
       <%= f.datetime_field :appointment_date, class: "form-control input-sm" %>

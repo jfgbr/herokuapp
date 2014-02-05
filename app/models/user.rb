@@ -15,7 +15,12 @@ class User < ActiveRecord::Base
   validates :password, length: { minimum: 6 }
   #validates_confirmation_of :password,
     #                      if: lambda { |m| m.password.present? }
+  
+  has_many :client_appointments, :class_name => "Appointment", inverse_of: :client_id
+  has_many :employee_appointments, :class_name => "Appointment", inverse_of: :employee_id
+  
   #has_many :employee_services
+  #has_many :appointments, :foreign_key => "client_id"
   #belongs_to :appointments
   #has_many :client_appointments, :class_name => "Appointment", :foreign_key => "client_id"
   #has_many :employee_appointments, :class_name => "Appointment", :foreign_key => "employee_id"
@@ -24,7 +29,10 @@ class User < ActiveRecord::Base
   has_many :services, :through => :employee_services
   has_many :categories, :through => :services
   
+  #accepts_nested_attributes_for :appointments
+  accepts_nested_attributes_for :employee_services
   accepts_nested_attributes_for :categories
+  
   
   def User.new_remember_token
     SecureRandom.urlsafe_base64

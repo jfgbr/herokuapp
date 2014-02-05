@@ -1,7 +1,7 @@
 class Service < ActiveRecord::Base
   belongs_to :category#, :class_name => "Category", :foreign_key => "category_id"
   has_many :employee_services
-  #has_many :appointments
+  has_many :appointments
   
   #has_many :employee_services, :class_name => "EmployeeService", :foreign_key => "service_id"
   #has_many :categories, :class_name => "Category", :through => :employee_services

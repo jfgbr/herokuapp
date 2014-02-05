@@ -8,11 +8,33 @@
   <div class="span6 offset3">
     <%= form_for(@appointment, url: appointments_path) do |f| %>
     <%= render 'shared/error_messages', model: @appointment %>
-    <div class="form-group">
-      <%= f.select(:employee_id, employees_for_select, {},
-:class => "form-control input-sm")  %>
-    </div>
-	  <%= render "shared/category_service_dependent", f: f, model: @appointment, category_id: params[:category_id] %>
+    <% @template = "appointment_employee_service_attributes_" %>
+    
+    <%= f.fields_for :employee_service_attributes do |es| %>
+	    <div class="form-group">
+	    	<%= es.collection_select :employee_id, User.where(:employee => true).order(:name), :id, :name, 
+	    		{include_blank: true}, 
+	    		{:class => "dynamic-select form-control input-sm", 
+	    			"data-children" => @template+"services_category_id|"+@template+"service_id",
+	    			"data-option-initial-value" => @employee} %>
+	    </div>
+  	
+		<%= es.fields_for :services do |s| %>
+		    <div class="field">
+				<%= s.label :category_id %><br />
+				<%= s.grouped_collection_select :category_id, User.where(:employee => true).order(:name), :categories, :name, :id, :text, 
+					{include_blank: true}, 
+		    		{:class => "dynamic-select form-control input-sm", "data-children" => @template+"service_id"} %>
+		  	</div>
+		<% end %>
+	  	<div class="field">
+			<%= es.label :service_id %><br />
+			<%= es.grouped_collection_select :service_id, Category.all.order(:text), :services, :text, :id, :text, 
+				{include_blank: true}, 
+	    		{:class => "form-control input-sm"} %>
+	  	</div>
+
+  	<% end %>
 	<div class="form-group">
       <%= f.label :appointment_date %>
       <%= f.datetime_field :appointment_date, class: "form-control input-sm" %>

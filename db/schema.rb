@@ -14,16 +14,20 @@
 ActiveRecord::Schema.define(version: 20140131103017) do
 
   create_table "appointments", force: true do |t|
-    t.integer  "client_id",                           null: false
-    t.integer  "employee_service_id",                 null: false
-    t.datetime "appointment_date",                    null: false
-    t.boolean  "paid",                default: false
+    t.integer  "client_id",                        null: false
+    t.integer  "employee_id",                      null: false
+    t.integer  "category_id",                      null: false
+    t.integer  "service_id",                       null: false
+    t.datetime "appointment_date",                 null: false
+    t.boolean  "paid",             default: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "appointments", ["category_id"], name: "index_appointments_on_category_id", using: :btree
   add_index "appointments", ["client_id"], name: "index_appointments_on_client_id", using: :btree
-  add_index "appointments", ["employee_service_id"], name: "index_appointments_on_employee_service_id", using: :btree
+  add_index "appointments", ["employee_id"], name: "index_appointments_on_employee_id", using: :btree
+  add_index "appointments", ["service_id"], name: "index_appointments_on_service_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.string   "text",       null: false
