@@ -1,5 +1,7 @@
 class Appointment < ActiveRecord::Base
   
+  #before_create {self.appointment_date = I18n.localize appointment_date, :format => :default}
+  #before_save {self.appointment_date = I18n.localize appointment_date, :format => :default}
   #id, client_id, employee_service_id, appointment_date, paid
   
   belongs_to :client, :class_name => "User", :foreign_key => "client_id"
@@ -22,4 +24,5 @@ class Appointment < ActiveRecord::Base
   validates :category_id, presence: true
   validates :service_id, presence: true
   validates :appointment_date, presence: true
+  validates :appointment_time, presence: true
 end

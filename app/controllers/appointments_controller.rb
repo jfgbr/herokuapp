@@ -1,20 +1,13 @@
 class AppointmentsController < ApplicationController
+  before_action :signed_in_user, only: [:index, :new, :edit, :update, :show]
+  
   def new
-    @appointment = Appointment.new
-    #@employee = User.new
+    @appointment = Appointment.new#(:appointment_date => (I18n.localize Date.today, :format => :default))
   end
 
   def create
-    @current_user = current_user
-    @category = params[:category_id]
     @appointment = Appointment.new(appointment_params)
-    #@employee = @appointment.employee_service.employee_id
-    #@employee = 2#params[:employees]# User.find(params[:employees]).first.id#.to_i
-    
-    #@appointment.employee_service = EmployeeService.new(:employee_id => params[:employee_id])
-    #@appointment.build_employee_service(:employee_id => params[employee_services:[:employee_id]], :service_id => params[employee_services:[:service_id]])
-    #@appointment.employee_service_id = EmployeeService.where(:employee_id => params[employee_services:[:employee_id]].to_i, :service_id => params[employee_services:[:service_id]].to_i)
-    @appointment.client_id = @current_user.id
+    @appointment.client_id = current_user.id
 
     if @appointment.save
       flash[:success] = "Appointment created"
@@ -22,10 +15,6 @@ class AppointmentsController < ApplicationController
     else
       render "new"
     end
-  end
-  
-  def category
-    @category
   end
 
   def destroy
@@ -35,7 +24,7 @@ class AppointmentsController < ApplicationController
   private
 
   def appointment_params
-    params.require(:appointment).permit(:employee_id, :category_id, :service_id, :appointment_date, :paid)
+    params.require(:appointment).permit(:employee_id, :category_id, :service_id, :appointment_date, :appointment_time, :paid)
   end
   
   def employee_service_params

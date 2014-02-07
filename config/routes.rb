@@ -27,4 +27,7 @@ Herokuapp::Application.routes.draw do
   get "categories/:employee_id/employee_categories" => "categories#employee", :as => "employee_categories", :format => :json
   get "categories/:category_id/category_services" => "categories#services", :as => "category_services", :format => :json
   
+  get "users/:employee_id/avaiable_time" => "users#time", :as => "avaiable_time", :format => :json
+  
+  
 end

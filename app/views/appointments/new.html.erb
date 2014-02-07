@@ -1,11 +1,11 @@
 <% content_for :head do %>
+	<%= stylesheet_link_tag    "calendar", "data-turbolinks-track" => true %>
 	<%= javascript_include_tag "appointment", "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "calendar", "data-turbolinks-track" => true %>
 <% end %>
 
 <% provide(:title, "New appointment") %>
 <%= page_heading('New appointment')%>
-<div class="row">
-  <div class="span6 offset3">
     <%= form_for(@appointment, url: appointments_path) do |f| %>
     <%= render 'shared/error_messages', model: @appointment %>
     <% @template = "appointment_" %>
@@ -41,14 +41,22 @@
 				"data-option-key-method" => :id,
 				"data-option-value-method" => :text} %>
   	</div>
-
+	
+	
+	
+	
 	<div class="form-group">
       <%= f.label :appointment_date %>
-      <%= f.datetime_field :appointment_date, class: "form-control input-sm" %>
+	  <%= f.hidden_field :appointment_date, class: "form-control input-sm"%>
+	  <div class="datepicker"></div>
+	  <%= render 'shared/calendar_schedule' %>	  
+	</div>
+	
+	<div class="form-group">
+      <%= f.label :appointment_time %>
+      <%= f.time_select :appointment_time, ampm: true, minute_step: 15, class: "form-control input-sm" %>
 	</div>
 
       <%= f.submit "Create", class: "btn btn-large btn-primary" %>
       <%= f.submit "Cancel", class: "btn btn-large btn-default", :name => "cancel" %>
     <% end %>
-  </div>
-</div>

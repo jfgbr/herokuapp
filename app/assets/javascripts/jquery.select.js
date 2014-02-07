@@ -3,7 +3,6 @@ $(function() {
 		var children_id = $(this).data("children");
 		var children = null;
 		var initial_value = $(this).data("option-initial-value");
-		
 		var regexp = /:[0-9a-zA-Z_]+:/g;
 		
 		if (children_id != null) {
@@ -12,7 +11,6 @@ $(function() {
 			});
 			
 			var data = [];
-			//data.push($(this).html());
 			$.each(children, function(id){
 				data.push($(this).html());
 				$(this).parent().hide();
@@ -23,7 +21,6 @@ $(function() {
 		
 		$(this).on('change', function() {
 			var selected = $(this).children(':selected');
-			//var escaped_value = selected.val();
 			var escaped = selected.text().replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1');
 			var parent = $(this);
 
@@ -31,7 +28,6 @@ $(function() {
 				var url_mask = $(this).data('option-url');
 				var key_method = $(this).data('option-key-method');
 				var value_method = $(this).data('option-value-method');
-				//$(this).parent().hide();
 				var options = [];
 				var option_null = "<option value=''></option>";
 				var newValues = false;
@@ -52,10 +48,7 @@ $(function() {
 				});
 				
 				$(this).empty();
-				//options = $(data[n]).filter("optgroup[label='" + escaped + "']").html();
 				if (options.length > 0) {
-					//options = options.replace('selected="selected"', '');
-					//$(this).html(options);
 					$(this).append(options);
 					$(this).parent().show();
 					$('label[for="' + $(this).attr('id') + '"]').parent().show();

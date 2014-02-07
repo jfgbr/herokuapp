@@ -8,6 +8,208 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ * 
+ *= require bootstrap
  *= require_self
- *= require_tree .
+ * //// require_tree .
+ * 
  */
+
+
+
+body {
+	min-height: 2000px;
+	padding-top: 70px;
+}
+
+h1 {
+	font-size: 20px !important;
+}
+select {
+	-webkit-appearance: none !important;
+	background: #fafafa url("data:image/svg+xml;base64, PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI2cHgiIGhlaWdodD0iM3B4IiB2aWV3Qm94PSIwIDAgNiAzIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA2IDMiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwb2x5Z29uIHBvaW50cz0iNS45OTIsMCAyLjk5MiwzIC0wLjAwOCwwICIvPjwvc3ZnPg==") no-repeat;
+	background-position-x: 97%;
+	background-position-y: center;
+	border: 1px solid #cccccc;
+	padding: 0.5 rem;
+	font-size: 0.875 rem;
+	-webkit-border-radius: 0;
+	border-radius: 0;
+}
+select.radius {
+	-webkit-border-radius: 3px;
+	border-radius: 3px;
+}
+select:hover {
+	background: #f3f3f3 url("data:image/svg+xml;base64, PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZlcnNpb249IjEuMSIgeD0iMHB4IiB5PSIwcHgiIHdpZHRoPSI2cHgiIGhlaWdodD0iM3B4IiB2aWV3Qm94PSIwIDAgNiAzIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCA2IDMiIHhtbDpzcGFjZT0icHJlc2VydmUiPjxwb2x5Z29uIHBvaW50cz0iNS45OTIsMCAyLjk5MiwzIC0wLjAwOCwwICIvPjwvc3ZnPg==") no-repeat;
+	background-position-x: 97%;
+	background-position-y: center;
+	border-color: #999999;
+}
+
+select::-ms-expand {
+	display: none;
+}
+
+@-moz-document url-prefix() {
+select {
+background: #fafafa; }
+
+select:hover {
+background: #f3f3f3; } }
+
+/* Add height value for select elements to match text input height */
+select {
+  height: 2.3125rem; }
+  
+/*ul {
+ list-style: none;
+ }*/
+
+.jumbotron {
+	padding: 30px;
+	margin-bottom: 30px;
+	font-size: 14px;
+	font-weight: 200;
+	line-height: 2.1428571435;
+	color: inherit;
+	background-color: #eeeeee;
+}
+
+.form-control {
+	width: 40%;
+	min-width: 130px;
+}
+
+@media (min-width: 768px) {
+	.form-control {
+		width: 100%;
+	}
+}
+
+.input-xs {
+	height: 20px;
+	padding: 2px 5px;
+	font-size: 10px;
+	line-height: 1.8;
+	border-radius: 2px;
+}
+select.input-xs {
+	height: 20px;
+	line-height: 20px;
+}
+
+@media (min-width: 768px) {
+	.navbar-form .form-group-xs {
+		margin-top: 7px;
+	}
+}
+
+#error_explanation {
+	color: #f00;ul {
+	list-style: none;
+	margin: 0 0 18px 0;li {
+	font-size: 8px;
+}
+}
+}
+
+.field_with_errors > input {
+	/*@extend .control-group;
+	 @extend .error;*/
+	border-color: red;
+}
+
+/* footer */
+
+footer {
+	margin-top: 45px;
+	padding-top: 5px;
+	border-top: 1px solid #eaeaea;
+	color: #999;
+}
+
+footer a {
+	color: #555;
+}
+
+footer a:hover {
+	color: #222;
+}
+
+footer small {
+	float: left;
+}
+
+footer ul {
+	float: right;
+	list-style: none;
+}
+
+footer ul li {
+	float: left;
+	margin-left: 10px;
+}
+
+/* Pagination */
+
+.pagination {
+	background: white;
+	cursor: default;
+	margin-top: 2px;
+	margin-bottom: 2px;
+	/* self-clearing method: */
+}
+.pagination a, .pagination span, .pagination em {
+	padding: 0.2em 0.5em;
+	display: block;
+	float: left;
+	margin-right: 1px;
+	font-size: 15px;
+}
+.pagination .disabled {
+	color: #999999;
+	border: 1px solid #dddddd;
+}
+.pagination .current {
+	font-style: normal;
+	font-weight: bold;
+	background: #2e6ab1;
+	color: white;
+	border: 1px solid #2e6ab1;
+}
+.pagination a {
+	text-decoration: none;
+	color: #105cb6;
+	border: 1px solid #9aafe5;
+}
+.pagination a:hover, .pagination a:focus {
+	color: #000033;
+	border-color: #000033;
+}
+.pagination .page_info {
+	background: #2e6ab1;
+	color: white;
+	padding: 0.4em 0.6em;
+	width: 22em;
+	margin-bottom: 0.3em;
+	text-align: center;
+}
+.pagination .page_info b {
+	color: #000033;
+	background: #6aa6ed;
+	padding: 0.1em 0.25em;
+}
+.pagination:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+* html .pagination {
+	height: 1%;
+}
+*:first-child + html .pagination {
+	overflow: hidden;
+}

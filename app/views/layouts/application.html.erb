@@ -7,7 +7,6 @@
 		<meta name="description" content="<%= content_for?(:description) ? yield(:description) : "Learn Rails" %>">
 		<title><%= full_title(yield(:title)) %></title>
 
-		<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
 		<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 		<%= yield :head %>
 		<%= #if current_page?("appointment") 
