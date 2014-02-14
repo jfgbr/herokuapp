@@ -20,9 +20,9 @@ module Herokuapp
     #config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     config.i18n.available_locales = [:en, :"en-US", :pt]
     config.i18n.default_locale = :"en-US"
-    config.i18n.enforce_available_locales = true
+    config.i18n.enforce_available_locales = false
     # or if one of your gem compete for pre-loading, use
-    I18n.config.enforce_available_locales = true
+    #I18n.config.enforce_available_locales = true
     
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
   end
