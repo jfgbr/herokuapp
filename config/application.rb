@@ -25,5 +25,9 @@ module Herokuapp
     I18n.config.enforce_available_locales = false
     
     config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+    # Enable the asset pipeline
+    config.assets.enabled = true
+    # Version of your assets, change this if you want to expire all your assets
+    config.assets.version = '1.0'
   end
 end
