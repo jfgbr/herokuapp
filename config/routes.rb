@@ -2,7 +2,7 @@ Herokuapp::Application.routes.draw do
   
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :categories
+  resources :categories, only: [:create, :destroy, :employee, :services]
   resources :services
   resources :appointments, only: [:create, :destroy]
   
@@ -23,11 +23,14 @@ Herokuapp::Application.routes.draw do
   match '/appointments',  to: 'appointments#new',  via: 'get'
   #match '/appointment/delete',  to: 'appointments#destroy',         via: 'delete'
   
+  match '/categories',  to: 'categories#new',  via: 'get'
+  
   #get "user/employees" => "users#employees", :as => "employees", :format => :json
   get "categories/:employee_id/employee_categories" => "categories#employee", :as => "employee_categories", :format => :json
-  get "categories/:category_id/category_services" => "categories#services", :as => "category_services", :format => :json
+  #get "categories/:category_id/category_services" => "categories#services", :as => "category_services", :format => :json
+  get "categories/:employee_id/:category_id/category_services" => "categories#services", :as => "category_services", :format => :json
   
+  get "appointments/:employee_id/:year_id/:month_id/unavaiable_dates" => "appointments#unavaiable_dates", :as => "unavaiable_dates", :format => :json
   get "users/:employee_id/avaiable_time" => "users#time", :as => "avaiable_time", :format => :json
-  
   
 end

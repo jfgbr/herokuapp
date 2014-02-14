@@ -11,11 +11,12 @@ $(function() {
 			});
 			
 			var data = [];
+			
 			$.each(children, function(id){
 				data.push($(this).html());
 				$(this).parent().hide();
 				$('label[for="' + $(this).attr('id') + '"]').parent().hide();
-			});
+			});			
 		}
 					
 		
@@ -23,44 +24,47 @@ $(function() {
 			var selected = $(this).children(':selected');
 			var escaped = selected.text().replace(/([ #;&,.+*~\':"!^$[\]()=>|\/@])/g, '\\$1');
 			var parent = $(this);
-
-			$.each(children, function(n, id) {
-				var url_mask = $(this).data('option-url');
-				var key_method = $(this).data('option-key-method');
-				var value_method = $(this).data('option-value-method');
-				var options = [];
-				var option_null = "<option value=''></option>";
-				var newValues = false;
-				
-				url = url_mask.replace(regexp, parent.val());
-				$.ajax({
-					url : url,
-					dataType : 'json',
-					async : false,
-					success : function(data) {
-						$.each(data, function(i, object) {
-							if (options.length == 0) options.push($(option_null));
-							
-							options.push(($('<option>').attr('value', object[key_method]).text(object[value_method])));
-						});
-
+			
+			if (children != null)
+				$.each(children, function(n, id) {
+					var url_mask = $(this).data('option-url');
+					var key_method = $(this).data('option-key-method');
+					var value_method = $(this).data('option-value-method');
+					var options = [];
+					var option_null = "<option value=''></option>";
+					var newValues = false;
+					var parent_val = (parent.val() == ""?"0":parent.val());
+					//url = url_mask.replace(regexp, parent_val);
+					var data = [];
+					data.json(url_mask, parent_val);
+					/*$.ajax({
+						url : url,
+						dataType : 'json',
+						async : false,
+						success : function(data) {*/
+							if (data != null)
+								$.each(data, function(i, object) {
+									if (options.length == 0) options.push($(option_null));
+									
+									options.push(($('<option>').attr('value', object[key_method]).text(object[value_method])));
+								});
+	
+						/*}
+					});*/
+					
+					$(this).empty();
+					if (options.length > 0) {
+						$(this).append(options);
+						$(this).parent().show();
+						$('label[for="' + $(this).attr('id') + '"]').parent().show();
+					} else {
+						$(this).parent().hide();
+						$('label[for="' + $(this).attr('id') + '"]').parent().hide();
 					}
-				});
-				
-				$(this).empty();
-				if (options.length > 0) {
-					$(this).append(options);
-					$(this).parent().show();
-					$('label[for="' + $(this).attr('id') + '"]').parent().show();
-
 					if ($(this).hasClass('dynamic-select')) {
 						$(this).change();
 					}
-				} else {
-					$(this).parent().hide();
-					$('label[for="' + $(this).attr('id') + '"]').parent().hide();
-				}
-			});
+				});
 
 		}); 
 

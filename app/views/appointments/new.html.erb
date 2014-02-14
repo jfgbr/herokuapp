@@ -1,7 +1,6 @@
 <% content_for :head do %>
 	<%= stylesheet_link_tag    "calendar", "data-turbolinks-track" => true %>
 	<%= javascript_include_tag "appointment", "data-turbolinks-track" => true %>
-	<%= javascript_include_tag "calendar", "data-turbolinks-track" => true %>
 <% end %>
 
 <% provide(:title, "New appointment") %>
@@ -9,13 +8,15 @@
     <%= form_for(@appointment, url: appointments_path) do |f| %>
     <%= render 'shared/error_messages', model: @appointment %>
     <% @template = "appointment_" %>
+    <% @date 
+    @dates = []%>
     
     <div class="form-group">
     	<%= f.label :employee_id %>
 		<%= f.collection_select :employee_id, User.where(:employee => true).order(:name), :id, :name, 
 			{include_blank: true}, 
 			{:class => "dynamic-select form-control input-sm", 
-				"data-children" => @template+"category_id",
+				"data-children" => @template+"category_id|"+@template+"appointment_date",
 				"data-option-initial-value" => f.object.employee_id} %>
     </div>
     
@@ -47,9 +48,15 @@
 	
 	<div class="form-group">
       <%= f.label :appointment_date %>
-	  <%= f.hidden_field :appointment_date, class: "form-control input-sm"%>
-	  <div class="datepicker"></div>
-	  <%= render 'shared/calendar_schedule' %>	  
+      <input type="hidden" id="txt_appointment_appointment_date" />
+	  <%= f.collection_select :appointment_date, [], 0, 1, 
+			{include_blank: false}, 
+			{:class => "dynamic-select form-control input-sm",
+				"data-option-url" => "appointments/:employee_id:/unavaiable_dates.json",
+				"data-option-key-method" => 0,
+				"data-option-value-method" => 1} %>
+	  
+	  <%= render 'shared/calendar_schedule', id: "appointment_appointment_date" %>
 	</div>
 	
 	<div class="form-group">

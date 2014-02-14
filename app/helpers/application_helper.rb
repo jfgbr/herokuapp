@@ -3,7 +3,7 @@ module ApplicationHelper
   def full_title(page_title)
     base_title = "Sistema"
     if page_title.empty?
-      base_title
+    base_title
     else
       "#{base_title} | #{page_title}"
     end
@@ -18,6 +18,12 @@ module ApplicationHelper
       "active"
     else
       ""
+    end
+  end
+
+  def respond_empty
+    respond_to do |format|
+      format.json { render :json => nil }
     end
   end
 end

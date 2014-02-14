@@ -1,0 +1,74 @@
+<% content_for :head do %>
+	<%= stylesheet_link_tag    "calendar", "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "jgFaces/jquery.JGFaces", "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "calendar", "data-turbolinks-track" => true %>
+<% end %>
+
+<% provide(:title, "New category") %>
+<%= page_heading('New category')%>
+
+<%= form_for(@appointment, url: categories_path) do |f| %>
+
+	<% @template = "appointment_" %>
+    
+    <div class="form-group">
+    	<ajax data-event="change" data-for="<%=@template + "employee_id" %>" 
+    		data-update="<%=@template + "category_id,"+@template+"service_id,div_"+@template + "appointment_date"%>"></ajax>
+    		
+    	<%= f.label :employee_id %>
+		<%= f.collection_select :employee_id, User.where(:employee => true).order(:name), :id, :name, 
+			{include_blank: true}, 
+			{:class => "dynamic form-control input-sm", 
+				"data-option-initial-value" => f.object.employee_id} %>
+    </div>
+    
+    <div class="form-group">
+    	<ajax data-event="change" data-for="<%=@template + "category_id" %>" data-update="<%=@template+"service_id"%>"></ajax>
+    	<param value="<%=@template + "employee_id" %>" for="<%=@template + "category_id" %>" />
+		<%= f.label :category_id %>
+		<%= f.grouped_collection_select :category_id, [], :categories, :name, :id, :text, 
+			{include_blank: true}, 
+    		{:class => "dynamic form-control input-sm", 
+				"data-option-initial-value" => f.object.category_id,
+				"data-action" => "categories/:employee_id:/employee_categories.json",
+				"data-option-key-method" => :id,
+				"data-option-value-method" => :text} %>
+  	</div>
+  	
+  	<div class="form-group">
+    	<param value="<%=@template + "employee_id" %>" for="<%=@template + "service_id" %>" />
+    	<param value="<%=@template + "category_id" %>" for="<%=@template + "service_id" %>" />
+		<%= f.label :service_id %>
+		<%= f.grouped_collection_select :service_id, [], :services, :text, :id, :text, 
+			{include_blank: true},
+    		{:class => "dynamic form-control input-sm", 
+				"data-option-initial-value" => f.object.service_id,
+				"data-action" => "categories/:employee_id:/:category_id:/category_services.json",
+				"data-option-key-method" => :id,
+				"data-option-value-method" => :text} %>
+  	</div>
+  	
+  	<div class="form-group">
+		<param value="<%=@template + "employee_id" %>" for="<%="div_" +@template + "appointment_date" %>" />
+      	<%= f.label :appointment_date %>
+	  	<%= f.hidden_field :appointment_date %>
+	  	<div id="div_appointment_appointment_date" class="calendar"
+	  		data-action="appointments/:employee_id:/:year_id:/:month_id:/unavaiable_dates.json"
+	  		data-default-format= "yy-mm-dd"
+			data-min-date= "0"
+			data-max-date= "+1M +10D"
+			data-alt-field= "input#appointment_appointment_date"
+			data-alt-format= "yy-mm-dd">
+		</div>
+	  
+	</div>
+	
+	<div class="form-group">
+      <%= f.label :appointment_time %>
+      <%= f.time_select :appointment_time, ampm: true, minute_step: 15, class: "form-control input-sm" %>
+	</div>
+
+	<%= f.submit "Create", class: "btn btn-large btn-primary" %>
+	<%= f.submit "Cancel", class: "btn btn-large btn-default", :name => "cancel" %>
+
+<% end %>
