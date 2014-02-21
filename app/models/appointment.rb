@@ -8,6 +8,7 @@ class Appointment < ActiveRecord::Base
   belongs_to :employee, :class_name => "User", :foreign_key => "employee_id"
   belongs_to :service
   belongs_to :category
+  belongs_to :schedule, :class_name => "Schedule", :foreign_key => "schedule_id", autosave: true
   
   #belongs_to :employee_service
   
@@ -18,6 +19,11 @@ class Appointment < ActiveRecord::Base
   
   #accepts_nested_attributes_for :employee_service
   #accepts_nested_attributes_for :services
+  #accepts_nested_attributes_for :schedule
+  
+  
+  attr_accessor :appointment_date
+  attr_accessor :appointment_time
   
   validates :client_id, presence: true
   validates :employee_id, presence: true
@@ -25,4 +31,21 @@ class Appointment < ActiveRecord::Base
   validates :service_id, presence: true
   validates :appointment_date, presence: true
   validates :appointment_time, presence: true
+  
+    
+  
+  after_validation :init_schedule
+
+  private
+  
+  def init_schedule
+    if !self.employee.nil? && !self.appointment_date.nil? && !self.appointment_time.nil?
+      self.schedule = Schedule.new( :weekly_schedule_id => self.employee.weekly_schedules.where(:workday_id => self.appointment_date.wday+1).first.id,
+                              :date => self.appointment_date,
+                              :start_time => self.appointment_time,
+                              :end_time => self.appointment_time + self.service.duration.minutes,
+                              :schedule_type_id => 1)
+    end
+  end
+  
 end

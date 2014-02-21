@@ -52,8 +52,10 @@ $(function() {
 	};
 	
 	$.widget("JGFaces.base", {
-		children : null,
-
+		options : {
+			rendered : null
+		},
+		
 		_create : function() {
 			// register the widget name
 			this.element.data('call', this.widgetName);

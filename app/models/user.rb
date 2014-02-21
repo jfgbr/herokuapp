@@ -28,6 +28,8 @@ class User < ActiveRecord::Base
   #belongs_to :employee_service#, :class_name => "EmployeeService", :foreign_key => "employee_id", inverse_of: :user
   has_many :services, :through => :employee_services
   has_many :categories, :through => :services
+  has_many :weekly_schedules, :class_name => "WeeklySchedule", :foreign_key => "employee_id"
+  has_many :schedules, :class_name => "Schedule", :foreign_key => "employee_id", :through => :weekly_schedules
   
   #accepts_nested_attributes_for :appointments
   accepts_nested_attributes_for :employee_services

@@ -1,2 +1,2 @@
-//=require jquery.select.js
+//=require jgFaces/jquery.JGFaces.js
 //=require calendar.js

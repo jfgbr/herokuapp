@@ -30,7 +30,7 @@
 			{include_blank: true}, 
     		{:class => "dynamic form-control input-sm", 
 				"data-option-initial-value" => f.object.category_id,
-				"data-action" => "categories/:employee_id:/employee_categories.json",
+				"data-action" => "categories/:employee_id:/categories.json",
 				"data-option-key-method" => :id,
 				"data-option-value-method" => :text} %>
   	</div>
@@ -43,7 +43,7 @@
 			{include_blank: true},
     		{:class => "dynamic form-control input-sm", 
 				"data-option-initial-value" => f.object.service_id,
-				"data-action" => "categories/:employee_id:/:category_id:/category_services.json",
+				"data-action" => "categories/:employee_id:/:category_id:/services.json",
 				"data-option-key-method" => :id,
 				"data-option-value-method" => :text} %>
   	</div>

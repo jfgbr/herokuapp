@@ -1,5 +1,4 @@
 class CategoriesController < ApplicationController
-  include CategoriesHelper
   def new
     @appointment = Appointment.new
   end
@@ -13,13 +12,6 @@ class CategoriesController < ApplicationController
     else
       render "new"
     end
-  end
-  def employee
-    #@employee = params[:employee_id]
-    category_for_select_by_employee(params[:employee_id])
-  end
-  def services
-    services_by_category(params[:employee_id],params[:category_id])
   end
   
   private

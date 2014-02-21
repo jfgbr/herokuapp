@@ -4,6 +4,7 @@
 $(function() {
 
 	$.widget("JGFaces.calendar", $.JGFaces.base, {
+		
 		validator : null,
 
 		_create : function() {
@@ -46,6 +47,10 @@ $(function() {
 				if (this.calendar != null) currentDate = this.calendar.datepicker( "getDate" ); 
 				this._action(currentDate.getFullYear(),currentDate.getMonth()+1);
 				this._createCalendar();
+				if (this.options.rendered ? this.options.rendered.apply(this.calendar, []) : true)
+					this.element.parent().show();
+				else
+					this.element.parent().hide();
 			} 
 		},
 		
@@ -74,6 +79,7 @@ $(function() {
 			
 			if (this.calendar != null) this.calendar.remove();
 			this.calendar = $("<div id='cal_"+ elem.attr("id") +"'></div>");
+			this.element.parent().hide();
 			this.calendar.datepicker({
 				defaultFormat : this.defaultFormat,
 				defaultDate : this.defaultDate,
@@ -93,5 +99,5 @@ $(function() {
 		
 	});
 	
-	$(".calendar").calendar();
+	//$(".calendar").calendar();
 }); 

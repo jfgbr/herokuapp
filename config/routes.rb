@@ -2,9 +2,9 @@ Herokuapp::Application.routes.draw do
   
   resources :users
   resources :sessions, only: [:new, :create, :destroy]
-  resources :categories, only: [:create, :destroy, :employee, :services]
+  resources :categories, only: [:create, :destroy]
   resources :services
-  resources :appointments, only: [:create, :destroy]
+  resources :appointments, only: [:create, :destroy, :employee, :services, :unavaiable_dates]
   
   root  'static_pages#home'
   match '/home', to: 'static_pages#home',         via: 'get'
@@ -26,9 +26,9 @@ Herokuapp::Application.routes.draw do
   match '/categories',  to: 'categories#new',  via: 'get'
   
   #get "user/employees" => "users#employees", :as => "employees", :format => :json
-  get "categories/:employee_id/employee_categories" => "categories#employee", :as => "employee_categories", :format => :json
+  get "appointments/:employee_id/categories" => "appointments#categories", :format => :json
   #get "categories/:category_id/category_services" => "categories#services", :as => "category_services", :format => :json
-  get "categories/:employee_id/:category_id/category_services" => "categories#services", :as => "category_services", :format => :json
+  get "appointments/:employee_id/:category_id/services" => "appointments#services", :format => :json
   
   get "appointments/:employee_id/:year_id/:month_id/unavaiable_dates" => "appointments#unavaiable_dates", :as => "unavaiable_dates", :format => :json
   get "users/:employee_id/avaiable_time" => "users#time", :as => "avaiable_time", :format => :json
