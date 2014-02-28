@@ -12,7 +12,7 @@ class AppointmentsController < ApplicationController
     @appointment = Appointment.new(appointment_params)
     @appointment.client_id = current_user.id
     @appointment.appointment_date = Date.parse(params[:appointment][:appointment_date])
-    @appointment.appointment_time = parse_calculator_time
+    @appointment.appointment_time = Time.parse(parse_calculator_time)
     #@appointment.date = @appointment.appointment_date
     #@schedule = Schedule.new( :weekly_schedule_id => @appointment.employee.weekly_schedules.where(:workday_id => @appointment.appointment_date.wday+1).first.id,
     #                          :date => @appointment.appointment_date,
@@ -53,8 +53,12 @@ class AppointmentsController < ApplicationController
     end
     end_date = start_date.at_end_of_month
 
-    dates = User.find(params[:employee_id]).schedules.where(:date => start_date..end_date).order(:date).collect { |m| (I18n.localize m.date, :format => :db) }
-
+    dates = User.find(params[:employee_id]).schedules.where(:date => start_date..end_date).order(:date).collect {|m| 
+        if m.date > Date.today
+          (I18n.localize m.date, :format => :db) 
+        end
+    }
+    
     respond_to do |format|
       format.json { render :json => dates }
     end
@@ -68,6 +72,7 @@ class AppointmentsController < ApplicationController
   end
 
   def parse_calculator_time
-    Time.parse("#{params[:appointment]["appointment_time(1i)"]}-#{params[:appointment]["appointment_time(2i)"]}-#{params[:appointment]["appointment_time(3i)"]} #{params[:appointment]["appointment_time(4i)"]}:#{params[:appointment]["appointment_time(5i)"]}")
+    #Time.parse("#{params[:appointment]["appointment_time(1i)"]}-#{params[:appointment]["appointment_time(2i)"]}-#{params[:appointment]["appointment_time(3i)"]} #{params[:appointment]["appointment_time(4i)"]}:#{params[:appointment]["appointment_time(5i)"]}")
+    "#{params[:appointment]["appointment_time(4i)"]}:#{params[:appointment]["appointment_time(5i)"]}"
   end
 end

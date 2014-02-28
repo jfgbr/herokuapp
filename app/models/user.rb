@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
   has_many :categories, :through => :services
   has_many :weekly_schedules, :class_name => "WeeklySchedule", :foreign_key => "employee_id"
   has_many :schedules, :class_name => "Schedule", :foreign_key => "employee_id", :through => :weekly_schedules
+  has_many :workdays, :class_name => "Workday", :foreign_key => "workday_id", :through => :weekly_schedules
   
   #accepts_nested_attributes_for :appointments
   accepts_nested_attributes_for :employee_services

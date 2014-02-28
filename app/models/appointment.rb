@@ -43,7 +43,7 @@ class Appointment < ActiveRecord::Base
       self.schedule = Schedule.new( :weekly_schedule_id => self.employee.weekly_schedules.where(:workday_id => self.appointment_date.wday+1).first.id,
                               :date => self.appointment_date,
                               :start_time => self.appointment_time,
-                              :end_time => self.appointment_time + self.service.duration.minutes,
+                              :end_time => (Time.parse(self.appointment_time) + self.service.duration.minutes).to_s(:time),
                               :schedule_type_id => 1)
     end
   end

@@ -4,8 +4,8 @@ class CreateWeeklySchedules < ActiveRecord::Migration
       
       t.integer :employee_id, null: false
       t.integer :workday_id, null: false
-      t.time :start_time, null: false
-      t.time :end_time, null: false
+      t.string :start_time, null: false, limit: 5
+      t.string :end_time, null: false, limit: 5
       t.boolean :active, null: false, default: true
       
       t.timestamps

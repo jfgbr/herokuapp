@@ -6,8 +6,8 @@ class CreateSchedules < ActiveRecord::Migration
       #t.integer :weekday_id, null: false
       t.integer :weekly_schedule_id, null: false
       t.date :date, null: false
-      t.time :start_time, null: false
-      t.time :end_time, null: false
+      t.string :start_time, null: false, limit: 5
+      t.string :end_time, null: false, limit: 5
       t.integer :schedule_type_id, null: false, default: 1 #appointment
       
       t.timestamps

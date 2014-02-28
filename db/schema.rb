@@ -51,11 +51,11 @@ ActiveRecord::Schema.define(version: 20140221112018) do
   end
 
   create_table "schedules", force: true do |t|
-    t.integer  "weekly_schedule_id",             null: false
-    t.date     "date",                           null: false
-    t.time     "start_time",                     null: false
-    t.time     "end_time",                       null: false
-    t.integer  "schedule_type_id",   default: 1, null: false
+    t.integer  "weekly_schedule_id",                       null: false
+    t.date     "date",                                     null: false
+    t.string   "start_time",         limit: 5,             null: false
+    t.string   "end_time",           limit: 5,             null: false
+    t.integer  "schedule_type_id",             default: 1, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -90,11 +90,11 @@ ActiveRecord::Schema.define(version: 20140221112018) do
   add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
 
   create_table "weekly_schedules", force: true do |t|
-    t.integer  "employee_id",                null: false
-    t.integer  "workday_id",                 null: false
-    t.time     "start_time",                 null: false
-    t.time     "end_time",                   null: false
-    t.boolean  "active",      default: true, null: false
+    t.integer  "employee_id",                          null: false
+    t.integer  "workday_id",                           null: false
+    t.string   "start_time",  limit: 5,                null: false
+    t.string   "end_time",    limit: 5,                null: false
+    t.boolean  "active",                default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
